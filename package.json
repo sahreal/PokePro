@@ -1,16 +1,16 @@
 {
-  "name": "cowapp",
+  "name": "PokePro",
   "version": "1.0.0",
-  "description": "cow app",
-  "main": "index.js",
+  "description": "Pokemon app",
+  "main": "server/index.js",
   "scripts": {
     "dev": "webpack -d --watch & nodemon index.js",
     "build": "webpack"
   },
   "keywords": [
-    "cows"
+    "Pokemon"
   ],
-  "author": "Andrew Kan",
+  "author": "Sahar",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.0",
