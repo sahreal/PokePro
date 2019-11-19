@@ -1,0 +1,10 @@
+CREATE DATABASE PokePro;
+USE PokePro;
+
+
+CREATE TABLE Team(
+   id INT AUTO_INCREMENT PRIMARY KEY,
+   name VARCHAR(255),
+   sprites VARCHAR(255)
+);
+
