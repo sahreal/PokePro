@@ -8,7 +8,19 @@ const path = require("path");
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client/public")));
 
-app.post("/teams", (req, res) => {});
+app.post("/teams", (req, res) => {
+  let data = req.body;
+  console.log(data, "WOW LOOK DATA");
+  let sql = "INSERT INTO Team(name, sprites) VALUES(?) ";
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(201);
+    }
+  });
+});
 
 let port = 5000;
 app.listen(port, function() {
