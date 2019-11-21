@@ -109,6 +109,7 @@ class App extends PureComponent {
 
   submitClick(e) {
     this.getPokemon();
+    // this.setState({ NoResults: false });
   }
 
   toggleClick() {
@@ -158,10 +159,18 @@ class App extends PureComponent {
           <button className="goButton" type="button" onClick={this.submitClick}>
             Go!
           </button>
-          {this.state.NoResults && this.state.search ? (
-            <p>
-              <b style={{ color: "red" }}>No Results Found</b>
-            </p>
+          {this.state.NoResults ? (
+            this.state.search.slice(this.state.search.length - 3) === "mon" ? (
+              <p>
+                <b style={{ color: "red" }}>
+                  WRONG UNIVERSE! GET OUTTA HERE YA %$#%# DIGIMON!
+                </b>
+              </p>
+            ) : (
+              <p>
+                <b style={{ color: "red" }}>No Results Found</b>
+              </p>
+            )
           ) : null}
         </div>
         <div>
