@@ -1,0 +1,17 @@
+.Sprites {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
+.Xmark {
+  height: 2%;
+  width: 2%;
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+b {
+  position: relative;
+}

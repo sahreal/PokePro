@@ -1,0 +1,50 @@
+.body {
+  background-image: url("https://cdn.hipwallpaper.com/i/65/60/IFyT5P.jpg");
+}
+
+.content {
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
+input {
+  width: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.goButton {
+  width: 5%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.goButton:hover {
+  background-color: crimson;
+}
+/* margin: 0 auto;
+  display: block; */
+/* width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 20px; */
+
+h1 {
+  text-align: center;
+}
+
+/* button {
+  margin: 0 auto;
+  display: block;
+} */
