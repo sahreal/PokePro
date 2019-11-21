@@ -4,8 +4,6 @@ import "./Teams.css";
 
 function Teams({ teams, deleteTeamMember }) {
   const deleteClickHandler = e => {
-    console.log("Delete");
-    console.log(e.target.alt, "WHAT");
     deleteTeamMember(e.target.alt);
   };
   return (
