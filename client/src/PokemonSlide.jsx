@@ -14,10 +14,16 @@ function PokemonSlide({ PokeImg, imageClick, stats, toggleClick }) {
         </div>
       ) : (
         <div>
-          <p>
-            <b>{PokeImg.id}</b>
-          </p>
-          <img src={PokeImg.sprites.front_default} />
+          {PokeImg.sprites.front_default === null ? (
+            <p style={{ color: "red" }}>Image Unavailable</p>
+          ) : (
+            <div>
+              <p>
+                <b>{PokeImg.id}</b>
+              </p>
+              <img src={PokeImg.sprites.front_default} />
+            </div>
+          )}
         </div>
       )}
       <Modal

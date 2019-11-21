@@ -71,15 +71,25 @@ class App extends PureComponent {
       const result = await axios.get(
         `https://pokeapi.co/api/v2/type/${this.state.search}`
       );
+      console.log("");
       this.setState({ stats: result.data });
       let pokemonArray = result.data.pokemon;
+      let newArray = pokemonArray.map(item => {
+        return axios.get(item.pokemon.url);
+      });
 
-      let newArray = [];
-      for (let each of pokemonArray) {
-        const axiosResult = await axios.get(each.pokemon.url);
-        newArray.push(axiosResult.data);
-      }
-      this.setState({ pokemon: newArray, NoResults: false });
+      Promise.all(newArray).then(result => {
+        var finalResult = result.map(each => {
+          return each.data;
+        });
+        this.setState({ pokemon: finalResult, NoResults: false });
+      });
+
+      // for (let each of pokemonArray) {
+      //   const axiosResult = await axios.get(each.pokemon.url);
+      //   newArray.push(axiosResult.data);
+      // }
+      //this.setState({ pokemon: newArray, NoResults: false });
     }
   }
 
@@ -125,15 +135,12 @@ class App extends PureComponent {
         obj[key] = pokemon;
       }
     }
-
-    console.log(obj, "OBJ");
     this.setState({ teams: obj, showTeams: true });
   }
 
   deleteTeamMember(id) {
     let obj = { ...this.state.teams };
     delete obj[id];
-    console.log(obj, "OBJECT KEY DELETE");
     this.setState({ teams: obj });
   }
 
@@ -151,7 +158,7 @@ class App extends PureComponent {
           <button className="goButton" type="button" onClick={this.submitClick}>
             Go!
           </button>
-          {this.state.NoResults ? (
+          {this.state.NoResults && this.state.search ? (
             <p>
               <b style={{ color: "red" }}>No Results Found</b>
             </p>
