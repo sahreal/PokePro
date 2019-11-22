@@ -2,11 +2,11 @@ import React from "react";
 import Xmark from "./window-close-solid.svg";
 import "./Teams.css";
 
-function Teams({ teams, deleteTeamMember }) {
+function Teams({ teams, deleteTeamMember, key }) {
   const deleteClickHandler = e => {
     deleteTeamMember(e.target.alt);
   };
-  console.log(teams, "TEAMS");
+
   return (
     <div className="Sprites">
       {Object.values(teams)

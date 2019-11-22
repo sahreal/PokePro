@@ -53,8 +53,6 @@ export default function SimpleModal({
   const AddToTeam = e => {
     let pokemon = PokeImg;
     imageClick(e, pokemon);
-    key++;
-    console.log(key, "key");
   };
   return (
     <div>

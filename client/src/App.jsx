@@ -72,7 +72,6 @@ class App extends PureComponent {
       const result = await axios.get(
         `https://pokeapi.co/api/v2/type/${this.state.search}`
       );
-      console.log("");
       this.setState({ stats: result.data });
       let pokemonArray = result.data.pokemon;
       let newArray = pokemonArray.map(item => {
@@ -124,24 +123,36 @@ class App extends PureComponent {
   imageClick(e, pokemon) {
     //let array = this.state.teams.concat(pokemon);
     //let obj = {};
-    let newKey = this.state.key;
-    console.log(newKey, "NEWKEY");
-    let obj = { ...this.state.teams };
-    if (Object.keys(obj).length === 0) {
-      obj[newKey] = pokemon;
-    } else {
-      newKey++;
-      obj[newKey] = pokemon;
-    }
 
-    this.setState({ teams: obj });
-    this.setState({ key: newKey });
+    if (Object.keys(this.state.teams).length <= 6) {
+      let newKey = this.state.key;
+      let obj = { ...this.state.teams };
+      //   obj[newKey] = pokemon;
+      //   console.log(newKey, "NEWKEY");
+      // } else {
+      //   newKey++;
+      //   obj[newKey] = pokemon;
+      //   console.log(newKey, "ELSEKEY");
+      // }
+
+      obj[newKey] = pokemon;
+      //console.log(newKey, "BEFORE");
+      //newKey++;
+      // console.log(newKey, "AFTER");
+      // console.log(this.state.key, "AFTER-STATE");
+      this.setState({ teams: obj });
+      this.setState({ key: newKey + 1 });
+    }
   }
 
   deleteTeamMember(id) {
     let obj = { ...this.state.teams };
+
     delete obj[id];
+    let newKey = this.state.key;
+
     this.setState({ teams: obj });
+    this.setState({ key: newKey - 1 });
   }
 
   render() {
@@ -180,6 +191,7 @@ class App extends PureComponent {
               <Teams
                 teams={this.state.teams}
                 deleteTeamMember={this.deleteTeamMember}
+                key={this.state.key}
               />{" "}
             </div>
           ) : null}
