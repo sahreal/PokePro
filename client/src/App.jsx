@@ -18,7 +18,8 @@ class App extends PureComponent {
       teams: {},
       showTeams: false,
       toggle: false,
-      NoResults: false
+      NoResults: false,
+      key: 0
     };
 
     this.getPokemon = this.getPokemon.bind(this);
@@ -123,20 +124,18 @@ class App extends PureComponent {
   imageClick(e, pokemon) {
     //let array = this.state.teams.concat(pokemon);
     //let obj = {};
-    let key = 0;
-
+    let newKey = this.state.key;
+    console.log(newKey, "NEWKEY");
     let obj = { ...this.state.teams };
     if (Object.keys(obj).length === 0) {
-      obj[key] = pokemon;
+      obj[newKey] = pokemon;
     } else {
-      for (key in obj) {
-        if (obj[key]) {
-          key++;
-        }
-        obj[key] = pokemon;
-      }
+      newKey++;
+      obj[newKey] = pokemon;
     }
-    this.setState({ teams: obj, showTeams: true });
+
+    this.setState({ teams: obj });
+    this.setState({ key: newKey });
   }
 
   deleteTeamMember(id) {
@@ -191,6 +190,7 @@ class App extends PureComponent {
             Pokemon={this.state.pokemon}
             imageClick={this.imageClick}
             toggleClick={this.toggleClick}
+            key={this.state.key}
           />
         )}
       </div>

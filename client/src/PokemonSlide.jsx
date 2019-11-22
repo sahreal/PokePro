@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "./Modal.jsx";
 import "./PokemonSlide.css";
 
-function PokemonSlide({ PokeImg, imageClick, stats, toggleClick }) {
+function PokemonSlide({ PokeImg, imageClick, stats, toggleClick, key }) {
   return (
     <div className="pokemonSlide">
       {PokeImg.front_default !== undefined ? (
@@ -31,6 +31,7 @@ function PokemonSlide({ PokeImg, imageClick, stats, toggleClick }) {
         imageClick={imageClick}
         stats={stats}
         toggleClick={toggleClick}
+        key={key}
       />
     </div>
   );

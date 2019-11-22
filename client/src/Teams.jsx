@@ -6,6 +6,7 @@ function Teams({ teams, deleteTeamMember }) {
   const deleteClickHandler = e => {
     deleteTeamMember(e.target.alt);
   };
+  console.log(teams, "TEAMS");
   return (
     <div className="Sprites">
       {Object.values(teams)
