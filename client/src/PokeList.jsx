@@ -2,7 +2,7 @@ import React from "react";
 import PokemonSlide from "./PokemonSlide.jsx";
 import "./PokemonList.css";
 
-function PokeList({ Pokemon, imageClick, stats, toggleClick }) {
+function PokeList({ Pokemon, imageClick, stats, toggleClick, key }) {
   return (
     <div className="Grid">
       {Pokemon.length > 1 ? (
@@ -14,6 +14,7 @@ function PokeList({ Pokemon, imageClick, stats, toggleClick }) {
               imageClick={imageClick}
               stats={stats}
               toggleClick={toggleClick}
+              key={key}
             />
           );
         })
@@ -23,6 +24,7 @@ function PokeList({ Pokemon, imageClick, stats, toggleClick }) {
           imageClick={imageClick}
           stats={stats}
           toggleClick={toggleClick}
+          key={key}
         />
       )}
     </div>

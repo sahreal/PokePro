@@ -34,7 +34,8 @@ export default function SimpleModal({
   PokeImg,
   imageClick,
   stats,
-  toggleClick
+  toggleClick,
+  key
 }) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
@@ -47,7 +48,6 @@ export default function SimpleModal({
 
   const handleClose = () => {
     setOpen(false);
-    toggleClick();
   };
 
   const AddToTeam = e => {
