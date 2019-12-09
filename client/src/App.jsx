@@ -3,7 +3,6 @@ import axios from "axios";
 import PokeList from "./PokeList.jsx";
 import Teams from "./Teams";
 import "babel-polyfill";
-//import Search from "./Search.jsx";
 import "./Main.css";
 class App extends PureComponent {
   constructor(props) {
@@ -26,8 +25,6 @@ class App extends PureComponent {
     this.handleChange = this.handleChange.bind(this);
     this.submitClick = this.submitClick.bind(this);
     this.imageClick = this.imageClick.bind(this);
-    //this.getTeams = this.getTeams.bind(this);
-    //this.postTeams = this.postTeams.bind(this);
     this.toggleClick = this.toggleClick.bind(this);
     this.deleteTeamMember = this.deleteTeamMember.bind(this);
   }
@@ -65,7 +62,7 @@ class App extends PureComponent {
         this.setState({ stats: stat.data });
         this.setState({ pokemon: result.data, NoResults: false });
       } catch {
-        console.log("WOW BIG ERROR");
+        console.log("ERROR SEARCH POKEMON BY NAME");
         this.setState({ NoResults: true });
       }
     } else {
@@ -84,32 +81,11 @@ class App extends PureComponent {
         });
         this.setState({ pokemon: finalResult, NoResults: false });
       });
-
-      // for (let each of pokemonArray) {
-      //   const axiosResult = await axios.get(each.pokemon.url);
-      //   newArray.push(axiosResult.data);
-      // }
-      //this.setState({ pokemon: newArray, NoResults: false });
     }
   }
 
-  // getTeams() {
-  //   axios
-  //     .get("/teams")
-  //     .then(result => console.log(result))
-  //     .catch(err => console.log(err, "ERROR BIG TIME"));
-  // }
-
-  // postTeams(pokemon) {
-  //   axios
-  //     .post("/teams", pokemon)
-  //     .then(() => this.getTeams())
-  //     .catch(err => console.log(err));
-  // }
-
   submitClick(e) {
     this.getPokemon();
-    // this.setState({ NoResults: false });
   }
 
   toggleClick() {
@@ -121,36 +97,21 @@ class App extends PureComponent {
   }
 
   imageClick(e, pokemon) {
-    //let array = this.state.teams.concat(pokemon);
-    //let obj = {};
-
-    if (Object.keys(this.state.teams).length <= 6) {
+    if (this.state.key <= 5) {
       let newKey = this.state.key;
       let obj = { ...this.state.teams };
-      //   obj[newKey] = pokemon;
-      //   console.log(newKey, "NEWKEY");
-      // } else {
-      //   newKey++;
-      //   obj[newKey] = pokemon;
-      //   console.log(newKey, "ELSEKEY");
-      // }
 
       obj[newKey] = pokemon;
-      //console.log(newKey, "BEFORE");
-      //newKey++;
-      // console.log(newKey, "AFTER");
-      // console.log(this.state.key, "AFTER-STATE");
       this.setState({ teams: obj });
       this.setState({ key: newKey + 1 });
     }
+    this.setState({ key: newKey });
   }
 
   deleteTeamMember(id) {
     let obj = { ...this.state.teams };
-
     delete obj[id];
     let newKey = this.state.key;
-
     this.setState({ teams: obj });
     this.setState({ key: newKey - 1 });
   }
@@ -173,7 +134,7 @@ class App extends PureComponent {
             this.state.search.slice(this.state.search.length - 3) === "mon" ? (
               <p>
                 <b style={{ color: "red" }}>
-                  WRONG UNIVERSE! GET OUTTA HERE YA %$#%# DIGIMON!
+                  WRONG UNIVERSE! This is POKEmon NOT DIGImon, Get it together!
                 </b>
               </p>
             ) : (
@@ -191,7 +152,7 @@ class App extends PureComponent {
               <Teams
                 teams={this.state.teams}
                 deleteTeamMember={this.deleteTeamMember}
-                key={this.state.key}
+                identity={this.state.key}
               />{" "}
             </div>
           ) : null}
@@ -202,7 +163,7 @@ class App extends PureComponent {
             Pokemon={this.state.pokemon}
             imageClick={this.imageClick}
             toggleClick={this.toggleClick}
-            key={this.state.key}
+            identity={this.state.key}
           />
         )}
       </div>
