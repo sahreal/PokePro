@@ -3,7 +3,8 @@
 }
 
 .content {
-  margin: 0 auto;
+  padding: 0px 0px 20px;
+  margin: 0px 0px 20px;
   display: block;
   text-align: center;
 }
@@ -42,6 +43,20 @@ input {
 
 h1 {
   text-align: center;
+}
+
+.Loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 150px 30px;
+  border-style: double;
+  border-width: 5px;
+  border-color: crimson;
+}
+
+.Loading #img {
+  border-width: 0px;
 }
 
 /* button {

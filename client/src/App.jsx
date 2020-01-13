@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import axios from "axios";
 import PokeList from "./PokeList.jsx";
 import Teams from "./Teams";
+import LoadingGif from "./Pikaloading.gif";
 import "babel-polyfill";
 import "./Main.css";
 class App extends PureComponent {
@@ -16,7 +17,7 @@ class App extends PureComponent {
       stats: {},
       teams: {},
       showTeams: false,
-      toggle: false,
+      Loading: false,
       NoResults: false,
       key: 0
     };
@@ -61,6 +62,7 @@ class App extends PureComponent {
         const stat = await axios.get(result.data.types[0].type.url);
         this.setState({ stats: stat.data });
         this.setState({ pokemon: result.data, NoResults: false });
+        this.setState({ Loading: false });
       } catch {
         console.log("ERROR SEARCH POKEMON BY NAME");
         this.setState({ NoResults: true });
@@ -79,12 +81,14 @@ class App extends PureComponent {
         var finalResult = result.map(each => {
           return each.data;
         });
+        this.setState({ Loading: false });
         this.setState({ pokemon: finalResult, NoResults: false });
       });
     }
   }
 
   submitClick(e) {
+    this.setState({ Loading: true });
     this.getPokemon();
   }
 
@@ -97,23 +101,22 @@ class App extends PureComponent {
   }
 
   imageClick(e, pokemon) {
-    if (this.state.key <= 5) {
-      let newKey = this.state.key;
-      let obj = { ...this.state.teams };
-
-      obj[newKey] = pokemon;
-      this.setState({ teams: obj });
-      this.setState({ key: newKey + 1 });
-    }
-    this.setState({ key: newKey });
+    // if (this.state.key <= 5) {
+    //   let newKey = this.state.key;
+    //   let obj = { ...this.state.teams };
+    //   obj[newKey] = pokemon;
+    //   this.setState({ teams: obj });
+    //   this.setState({ key: newKey + 1 });
+    // }
+    // this.setState({ key: newKey });
   }
 
   deleteTeamMember(id) {
-    let obj = { ...this.state.teams };
-    delete obj[id];
-    let newKey = this.state.key;
-    this.setState({ teams: obj });
-    this.setState({ key: newKey - 1 });
+    // let obj = { ...this.state.teams };
+    // delete obj[id];
+    // let newKey = this.state.key;
+    // this.setState({ teams: obj });
+    // this.setState({ key: newKey - 1 });
   }
 
   render() {
@@ -157,6 +160,14 @@ class App extends PureComponent {
             </div>
           ) : null}
         </div>
+
+        {this.state.Loading ? (
+          <div className="Loading">
+            LOADING...
+            <img src={LoadingGif} style={{ padding: "0px 20px" }} />
+          </div>
+        ) : null}
+
         {this.state.pokemon.length === 0 ? null : (
           <PokeList
             stats={this.state.stats}
